@@ -12,14 +12,14 @@
 
 struct mpfi_LegendrePolynomial_t{
 
-    mpfi_t derivative;        // @brief First derivative of the Legendre polynomial
-    mpfi_t polynomial_target; // @brief Legendre polynomial of the target degree (n)
-    mpfi_t polynomial_ref1;   // @brief Legendre polynomial of the degree (n - 1)
-    mpfi_t polynomial_ref2;   // @brief Legendre polynomial of the degree (n - 2)
-    mpfi_t range;             // @brief Interval [-1, 1]
-    mpfi_t x;                 // @brief Evaluation point
-    mpfi_t x_copy;            // @brief Copy of the evaluation point
-    mpfi_t x_diff;            // @brief Difference of the evaluation point
+    mpfi_t derivative;        /**< First derivative of the Legendre polynomial */
+    mpfi_t polynomial_target; /**< Legendre polynomial of the target degree (n) */
+    mpfi_t polynomial_ref1;   /**< Legendre polynomial of the degree (n - 1) */
+    mpfi_t polynomial_ref2;   /**< Legendre polynomial of the degree (n - 2) */
+    mpfi_t range;             /**< Interval [-1, 1] */
+    mpfi_t x;                 /**< Evaluation point */
+    mpfi_t x_copy;            /**< Copy of the evaluation point */
+    mpfi_t x_diff;            /**< Difference of the evaluation point */
 
 };
 
@@ -88,12 +88,12 @@ void mpfi_init2_LegendrePolynomial(
  */
 struct mpfi_LegendrePolynomialWorkspace_t {
 
-    mpfi_t denominator; // @brief Stores the denominator during computations
-    mpfi_t numerator;   // @brief Stores the numerator during computations
-    mpfi_t temp1;       // @brief Temporary variable for calculations
-    mpfi_t temp2;       // @brief Temporary variable for calculations
-    mpfi_t temp3;       // @brief Temporary variable for calculations
-    mpfi_t temp4;       // @brief Temporary variable for calculations
+    mpfi_t denominator; /**< Stores the denominator during computations */
+    mpfi_t numerator;   /**< Stores the numerator during computations */
+    mpfi_t temp1;       /**< Temporary variable for calculations */
+    mpfi_t temp2;       /**< Temporary variable for calculations */
+    mpfi_t temp3;       /**< Temporary variable for calculations */
+    mpfi_t temp4;       /**< Temporary variable for calculations */
 
 };
 
