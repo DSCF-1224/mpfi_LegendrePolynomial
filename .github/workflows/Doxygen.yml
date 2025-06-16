@@ -4,7 +4,11 @@ on: [push, pull_request]
 
 jobs:
   doxygen:
+
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
 
     steps:
 
