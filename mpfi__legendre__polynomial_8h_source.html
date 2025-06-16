@@ -5,10 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: mpfi_legendre_polynomial.h Source File</title>
+<title>mpfi_LegendrePolynomial: mpfi_legendre_polynomial.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -21,8 +25,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">My Project
+   <div id="projectname">mpfi_LegendrePolynomial
    </div>
+   <div id="projectbrief">C implementation of Legendre polynomials using MPFI (Multiple Precision Floating-Point Interval Library)</div>
   </td>
  </tr>
  </tbody>
@@ -52,6 +57,22 @@ $(document).ready(function() { init_codefold(0); });
 /* @license-end */
 </script>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('mpfi__legendre__polynomial_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -92,15 +113,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html">   13</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structmpfi__LegendrePolynomial__t.html">mpfi_LegendrePolynomial_t</a>{</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#ad779fbd9f137a37c03645bf7971e823b">   15</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#ad779fbd9f137a37c03645bf7971e823b">derivative</a>;        <span class="comment">// @brief First derivative of the Legendre polynomial</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#a8866aebfd2bb1dd884e65ddd945dd470">   16</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#a8866aebfd2bb1dd884e65ddd945dd470">polynomial_target</a>; <span class="comment">// @brief Legendre polynomial of the target degree (n)</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#a08761adcb210c6f6e9eebb72e0c9d05d">   17</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#a08761adcb210c6f6e9eebb72e0c9d05d">polynomial_ref1</a>;   <span class="comment">// @brief Legendre polynomial of the degree (n - 1)</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#ac1eb3d6d7c19b212d4449cbe0eff8cea">   18</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#ac1eb3d6d7c19b212d4449cbe0eff8cea">polynomial_ref2</a>;   <span class="comment">// @brief Legendre polynomial of the degree (n - 2)</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#a3ccdd1552a49956b844033ba2d612236">   19</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#a3ccdd1552a49956b844033ba2d612236">range</a>;             <span class="comment">// @brief Interval [-1, 1]</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#ac158da9030c11aee98b9bc6bd469c34b">   20</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#ac158da9030c11aee98b9bc6bd469c34b">x</a>;                 <span class="comment">// @brief Evaluation point</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#a183ba42c7e6216479a91e9a6d11d8cf9">   21</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#a183ba42c7e6216479a91e9a6d11d8cf9">x_copy</a>;            <span class="comment">// @brief Copy of the evaluation point</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#a78a2ac020f7369ec2fac92ea0fc069c3">   22</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#a78a2ac020f7369ec2fac92ea0fc069c3">x_diff</a>;            <span class="comment">// @brief Difference of the evaluation point</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#ad779fbd9f137a37c03645bf7971e823b">   15</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#ad779fbd9f137a37c03645bf7971e823b">derivative</a>;        </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#a8866aebfd2bb1dd884e65ddd945dd470">   16</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#a8866aebfd2bb1dd884e65ddd945dd470">polynomial_target</a>; </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#a08761adcb210c6f6e9eebb72e0c9d05d">   17</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#a08761adcb210c6f6e9eebb72e0c9d05d">polynomial_ref1</a>;   </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#ac1eb3d6d7c19b212d4449cbe0eff8cea">   18</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#ac1eb3d6d7c19b212d4449cbe0eff8cea">polynomial_ref2</a>;   </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#a3ccdd1552a49956b844033ba2d612236">   19</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#a3ccdd1552a49956b844033ba2d612236">range</a>;             </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#ac158da9030c11aee98b9bc6bd469c34b">   20</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#ac158da9030c11aee98b9bc6bd469c34b">x</a>;                 </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#a183ba42c7e6216479a91e9a6d11d8cf9">   21</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#a183ba42c7e6216479a91e9a6d11d8cf9">x_copy</a>;            </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomial__t.html#a78a2ac020f7369ec2fac92ea0fc069c3">   22</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomial__t.html#a78a2ac020f7369ec2fac92ea0fc069c3">x_diff</a>;            </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>};</div>
 </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
@@ -161,13 +181,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00089" data-start="{" data-end="};">
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html">   89</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structmpfi__LegendrePolynomialWorkspace__t.html">mpfi_LegendrePolynomialWorkspace_t</a> {</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html#a8b7b46aa643cc8508345f06a52115203">   91</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomialWorkspace__t.html#a8b7b46aa643cc8508345f06a52115203">denominator</a>; <span class="comment">// @brief Stores the denominator during computations</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html#ac9feac6f0a4914b1a3114b778536fb09">   92</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomialWorkspace__t.html#ac9feac6f0a4914b1a3114b778536fb09">numerator</a>;   <span class="comment">// @brief Stores the numerator during computations</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html#abb0e7524d525a2c6515bc58f24863ca4">   93</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomialWorkspace__t.html#abb0e7524d525a2c6515bc58f24863ca4">temp1</a>;       <span class="comment">// @brief Temporary variable for calculations</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html#a91428a1fdfe96c76a72cff0e107467d5">   94</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomialWorkspace__t.html#a91428a1fdfe96c76a72cff0e107467d5">temp2</a>;       <span class="comment">// @brief Temporary variable for calculations</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html#a77bae108f019ea3a8622397100fbb4bb">   95</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomialWorkspace__t.html#a77bae108f019ea3a8622397100fbb4bb">temp3</a>;       <span class="comment">// @brief Temporary variable for calculations</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html#a78bb7a35a188c5e0880b2e8a9db643aa">   96</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomialWorkspace__t.html#a78bb7a35a188c5e0880b2e8a9db643aa">temp4</a>;       <span class="comment">// @brief Temporary variable for calculations</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html#a8b7b46aa643cc8508345f06a52115203">   91</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomialWorkspace__t.html#a8b7b46aa643cc8508345f06a52115203">denominator</a>; </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html#ac9feac6f0a4914b1a3114b778536fb09">   92</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomialWorkspace__t.html#ac9feac6f0a4914b1a3114b778536fb09">numerator</a>;   </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html#abb0e7524d525a2c6515bc58f24863ca4">   93</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomialWorkspace__t.html#abb0e7524d525a2c6515bc58f24863ca4">temp1</a>;       </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html#a91428a1fdfe96c76a72cff0e107467d5">   94</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomialWorkspace__t.html#a91428a1fdfe96c76a72cff0e107467d5">temp2</a>;       </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html#a77bae108f019ea3a8622397100fbb4bb">   95</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomialWorkspace__t.html#a77bae108f019ea3a8622397100fbb4bb">temp3</a>;       </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="structmpfi__LegendrePolynomialWorkspace__t.html#a78bb7a35a188c5e0880b2e8a9db643aa">   96</a></span>    mpfi_t <a class="code hl_variable" href="structmpfi__LegendrePolynomialWorkspace__t.html#a78bb7a35a188c5e0880b2e8a9db643aa">temp4</a>;       </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>};</div>
 </div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
@@ -455,9 +474,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="astructmpfi__LegendrePolynomial__t_html_ac1eb3d6d7c19b212d4449cbe0eff8cea"><div class="ttname"><a href="structmpfi__LegendrePolynomial__t.html#ac1eb3d6d7c19b212d4449cbe0eff8cea">mpfi_LegendrePolynomial_t::polynomial_ref2</a></div><div class="ttdeci">mpfi_t polynomial_ref2</div><div class="ttdef"><b>Definition</b> <a href="mpfi__legendre__polynomial_8h_source.html#l00018">mpfi_legendre_polynomial.h:18</a></div></div>
 <div class="ttc" id="astructmpfi__LegendrePolynomial__t_html_ad779fbd9f137a37c03645bf7971e823b"><div class="ttname"><a href="structmpfi__LegendrePolynomial__t.html#ad779fbd9f137a37c03645bf7971e823b">mpfi_LegendrePolynomial_t::derivative</a></div><div class="ttdeci">mpfi_t derivative</div><div class="ttdef"><b>Definition</b> <a href="mpfi__legendre__polynomial_8h_source.html#l00015">mpfi_legendre_polynomial.h:15</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="mpfi__legendre__polynomial_8h.html">mpfi_legendre_polynomial.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
 </body>
 </html>
