@@ -1,0 +1,45 @@
+name: Generate Doxygen Documentation
+
+on: [push, pull_request]
+
+jobs:
+  doxygen:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update ubuntu
+        run: sudo apt update
+
+      - name: Install Doxygen
+        run: sudo apt install -y doxygen
+
+      - name: Verify Doxygen installation
+        run: doxygen --version
+
+      - name: Install Graphviz 
+        run: sudo apt install -y graphviz
+
+      - name: Verify Graphviz installation
+        run: dot -V
+
+      - name: Run Doxygen
+        run: doxygen Doxyfile
+
+      - name: Upload documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: html
+          if-no-files-found: error
+
+      - name: Deploy documentation
+        uses: JamesIves/github-pages-deploy-action@v4.7.3
+        if: ${{ github.event_name == 'push'  &&  github.ref == 'refs/heads/main' }}
+        with:
+          branch: github-pages
+          folder: doc
+
