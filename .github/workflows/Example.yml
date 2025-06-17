@@ -1,0 +1,20 @@
+name: Compile & Run Example
+
+on: [push, pull_request]
+
+jobs:
+
+  compile_and_run_example:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update ubuntu
+        run: sudo apt update
+
+      - name: Verify gcc installation
+        run: gcc --version
