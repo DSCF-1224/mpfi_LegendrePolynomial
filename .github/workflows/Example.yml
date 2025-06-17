@@ -18,3 +18,9 @@ jobs:
 
       - name: Verify gcc installation
         run: gcc --version
+
+      - name: Compile Example
+        run: gcc example.c -Wall -Wextra -lgmp -lmpfr -lmpfi
+
+      - name: Run Example
+        run: ./a.out
