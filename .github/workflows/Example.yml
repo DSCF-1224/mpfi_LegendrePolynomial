@@ -13,11 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Update ubuntu
-        run: sudo apt update
+      - name: Update & Upgrade ubuntu
+        run: |
+          sudo apt-get update -y
+          sudo apt-get upgrade -y
 
       - name: Verify gcc installation
         run: gcc --version
+
+      - name: Install MPFI
+        run: sudo apt-get install -y libmpfi-dev
 
       - name: Compile Example
         run: gcc example.c -Wall -Wextra -lgmp -lmpfr -lmpfi

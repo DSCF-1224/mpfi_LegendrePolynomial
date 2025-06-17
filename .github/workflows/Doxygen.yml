@@ -22,8 +22,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Update ubuntu
-        run: sudo apt update
+      - name: Update & Upgrade ubuntu
+        run: |
+          sudo apt-get update -y
+          sudo apt-get upgrade -y
 
       - name: Install Doxygen
         run: sudo apt install -y doxygen
