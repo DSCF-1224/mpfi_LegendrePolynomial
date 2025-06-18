@@ -9,13 +9,22 @@ on:
     types:
       - completed
 
+concurrency:
+
+  group: "pages"
+
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
 jobs:
+
   doxygen:
 
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
 
@@ -51,8 +60,8 @@ jobs:
 
       - name: Deploy documentation
         uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.event_name == 'push'  &&  github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./html
+          publish_branch: gh-pages
 
