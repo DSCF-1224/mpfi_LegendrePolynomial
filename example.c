@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "mpfi_legendre_polynomial.h"
 
 
