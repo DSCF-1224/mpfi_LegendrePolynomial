@@ -31,11 +31,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Update & Upgrade ubuntu
-        run: |
-          sudo apt-get update -y
-          sudo apt-get upgrade -y
-
       - name: Install Doxygen
         run: sudo apt install -y doxygen
 
@@ -60,6 +55,7 @@ jobs:
 
       - name: Deploy documentation
         uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.event.workflow_run.head_branch == 'main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./html
