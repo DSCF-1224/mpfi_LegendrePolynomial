@@ -2,8 +2,9 @@
 #include "mpfi_legendre_polynomial.h"
 
 
+
 /**
- * @brief
+ * @brief Run example how to use mpfi_LegendrePolynomial_Recursive
  * <ol>
  *   <li>
  *     Open the file to save the results.<br>
@@ -14,13 +15,16 @@
  *   </li>
  * </ol>
  * 
+ * @param precision Precision for the floating-point computations.
+ * @param degree    The target degree of Legendre polynomial.
+ * 
  * @version Experimental
  */
-int example_mpfi_LegendrePolynomial_Recursive(const unsigned long degree)
+int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, const unsigned long degree)
 {
     char output_filename[FILENAME_MAX];
 
-    snprintf(output_filename, sizeof(output_filename), "degree_%3.3ld.dat", degree);
+    snprintf(output_filename, sizeof(output_filename), "precision_%3.3ld_degree_%3.3ld.dat", precision, degree);
 
     FILE *output_filestream = fopen(output_filename, "w");
 
@@ -31,6 +35,44 @@ int example_mpfi_LegendrePolynomial_Recursive(const unsigned long degree)
     }
 
     fclose(output_filestream);
+
+    return EXIT_SUCCESS;
+}
+
+
+/**
+ * @brief Run example how to use mpfi_LegendrePolynomial_Recursive
+ * 
+ * @param precision Precision for the floating-point computations.
+ * 
+ * @version Experimental
+ */
+int example_mpfi_LegendrePolynomial_Recursive(const mpfr_prec_t precision)
+{
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision,  1UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision,  2UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision,  3UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision,  4UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision,  5UL) ) return EXIT_FAILURE;
+
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision,  9UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 19UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 20UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 29UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 30UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 39UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 40UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 49UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 50UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 59UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 60UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 69UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 70UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 79UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 80UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 89UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 90UL) ) return EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, 99UL) ) return EXIT_FAILURE;
 
     return EXIT_SUCCESS;
 }
