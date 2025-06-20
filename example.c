@@ -3,6 +3,12 @@
 
 
 
+#define NUM_INTERVALS 255UL
+#define MINVAL_X       -1L
+#define MAXVAL_X        1L
+
+
+
 /**
  * @brief Run example how to use mpfi_LegendrePolynomial_Recursive
  * <ol>
@@ -36,6 +42,11 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
 
 
+    mpfi_t step_x, minval_x;
+
+    mpfi_init2( step_x   , precision );
+    mpfi_init2( minval_x , precision );
+
     struct mpfi_LegendrePolynomial_t          legendre_polynomial;
     struct mpfi_LegendrePolynomialWorkspace_t workspace;
 
@@ -45,6 +56,9 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
 
     fclose(output_filestream);
+
+    mpfi_clear( step_x   );
+    mpfi_clear( minval_x );
 
     mpfi_clear_LegendrePolynomial          ( &legendre_polynomial );
     mpfi_clear_LegendrePolynomialWorkspace ( &workspace           );
