@@ -34,7 +34,22 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
         return EXIT_FAILURE;
     }
 
+
+
+    struct mpfi_LegendrePolynomial_t          legendre_polynomial;
+    struct mpfi_LegendrePolynomialWorkspace_t workspace;
+
+    mpfi_init2_LegendrePolynomial          ( &legendre_polynomial , precision );
+    mpfi_init2_LegendrePolynomialWorkspace ( &workspace           , precision );
+
+
+
     fclose(output_filestream);
+
+    mpfi_clear_LegendrePolynomial          ( &legendre_polynomial );
+    mpfi_clear_LegendrePolynomialWorkspace ( &workspace           );
+
+
 
     return EXIT_SUCCESS;
 }
