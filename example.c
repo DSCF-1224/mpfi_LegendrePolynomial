@@ -3,9 +3,14 @@
 
 
 
+/// @brief Parameter to set `step_x`
 #define NUM_INTERVALS 255UL
-#define MINVAL_X       -1L
-#define MAXVAL_X        1L
+
+/// @brief Specify the range to compute legendre polynomial
+#define MINVAL_X -1L
+
+/// @brief Specify the range to compute legendre polynomial
+#define MAXVAL_X  1L
 
 
 
