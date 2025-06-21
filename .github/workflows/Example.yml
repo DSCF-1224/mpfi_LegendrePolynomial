@@ -19,8 +19,26 @@ jobs:
       - name: Install MPFI
         run: sudo apt-get install -y libmpfi-dev
 
+      - name: Install Gnuplot
+        run: sudo apt-get install -y gnuplot
+
+      - name: Verify Gnuplot installation
+        run: gnuplot --version
+
       - name: Compile Example
         run: gcc example.c -Wall -Wextra -lgmp -lmpfr -lmpfi
 
       - name: Run Example
         run: ./a.out
+
+      - name: Run Gnuplot
+        run: |
+          mkdir example
+          gnuplot example.plt
+
+      - name: Upload documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: example
+          if-no-files-found: error
