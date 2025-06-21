@@ -60,6 +60,24 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
 
 
+    mpfi_set_si( minval_x, MINVAL_X );
+
+    mpfi_set_si( workspace.temp1 , (MAXVAL_X - MINVAL_X)                 );
+    mpfi_div_ui( step_x          , workspace.temp1       , NUM_INTERVALS );
+
+
+
+    for (unsigned long i = 0; i < NUM_INTERVALS; i++)
+    {
+        mpfi_mul_ui( workspace.temp1       , step_x   , i               );
+        mpfi_add   ( legendre_polynomial.x , minval_x , workspace.temp1 );
+
+        mpfr_fprintf( output_filestream, "%Ra "  , &legendre_polynomial.x->left  );
+        mpfr_fprintf( output_filestream, "%Ra\n" , &legendre_polynomial.x->right );
+    }
+
+
+
     fclose(output_filestream);
 
     mpfi_clear( step_x   );
