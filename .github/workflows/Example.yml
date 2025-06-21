@@ -30,3 +30,6 @@ jobs:
 
       - name: Run Example
         run: ./a.out
+
+      - name: Run Gnuplot
+        run: gnuplot example.plt
