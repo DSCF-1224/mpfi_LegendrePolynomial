@@ -72,8 +72,22 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
         mpfi_mul_ui( workspace.temp1       , step_x   , i               );
         mpfi_add   ( legendre_polynomial.x , minval_x , workspace.temp1 );
 
-        mpfr_fprintf( output_filestream, "%Ra "  , &legendre_polynomial.x->left  );
-        mpfr_fprintf( output_filestream, "%Ra\n" , &legendre_polynomial.x->right );
+        const int status =
+            mpfi_LegendrePolynomial_Recursive(
+                /**/  legendre_polynomial.polynomial_target , //
+                /**/  legendre_polynomial.polynomial_ref1   , //
+                /**/  legendre_polynomial.polynomial_ref2   , //
+                /**/  degree                                , //
+                /**/  legendre_polynomial.range             , //
+                /**/  legendre_polynomial.x                 , //
+                /**/ &workspace                               //
+            );
+
+        mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial.x                ->left  );
+        mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial.x                ->right );
+        mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial.polynomial_target->left  );
+        mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial.polynomial_target->right );
+        mpfr_fprintf( output_filestream, "%d\n" ,  status                                       );
     }
 
 
