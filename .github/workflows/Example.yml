@@ -32,4 +32,6 @@ jobs:
         run: ./a.out
 
       - name: Run Gnuplot
-        run: gnuplot example.plt
+        run: |
+          mkdir example
+          gnuplot example.plt
