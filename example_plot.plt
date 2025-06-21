@@ -27,7 +27,7 @@ plot for [i = 1:(|val_degree|)] \
 set output  ('example/precision_' . ARG1 . '_width.svg')
 
 set title ('mpfr\_precision: ' . ARG1)
-set ytics 
+set ytics 5
 set yrange [-25:5]
 set ylabel 'log10(right-left)'
 
@@ -37,5 +37,5 @@ plot for [i = 1:(|val_degree|)] \
      with lines linecolor palette \
      title str_degree
 
-unset ytics
-unset yrange
+set ytics auto
+set yrange [*:*]
