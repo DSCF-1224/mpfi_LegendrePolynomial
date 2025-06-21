@@ -35,3 +35,10 @@ jobs:
         run: |
           mkdir example
           gnuplot example.plt
+
+      - name: Upload documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: example
+          if-no-files-found: error
