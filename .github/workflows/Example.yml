@@ -19,6 +19,12 @@ jobs:
       - name: Install MPFI
         run: sudo apt-get install -y libmpfi-dev
 
+      - name: Install Gnuplot
+        run: sudo apt-get install -y gnuplot
+
+      - name: Verify Gnuplot installation
+        run: gnuplot --version
+
       - name: Compile Example
         run: gcc example.c -Wall -Wextra -lgmp -lmpfr -lmpfi
 
