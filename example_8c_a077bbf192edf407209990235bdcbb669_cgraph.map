@@ -1,0 +1,15 @@
+<map id="example_mpfi_LegendrePolynomial_Recursive" name="example_mpfi_LegendrePolynomial_Recursive">
+<area shape="rect" id="Node000001" title="Run example how to use mpfi_LegendrePolynomial_Recursive." alt="" coords="5,113,260,153"/>
+<area shape="rect" id="Node000002" href="$example_8c.html#a69fa8ae0a20defd37042551440e4fcc6" title="Run example how to use mpfi_LegendrePolynomial_Recursive." alt="" coords="308,113,563,153"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="260,130,294,130,294,135,260,135"/>
+<area shape="rect" id="Node000003" href="$mpfi__legendre__polynomial_8h.html#a1d80b3c7be4fd656247b6a76259e6b77" title="Clears the memory allocated for a Legendre polynomial structure." alt="" coords="611,5,841,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="468,110,532,75,610,41,640,31,642,37,612,46,535,80,471,115"/>
+<area shape="rect" id="Node000004" href="$mpfi__legendre__polynomial_8h.html#a8a0298e73b124eef62584deda59fed85" title="Clears the memory allocated for a Legendre polynomial workspace." alt="" coords="611,55,841,95"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="537,110,610,95,611,101,538,115"/>
+<area shape="rect" id="Node000005" href="$mpfi__legendre__polynomial_8h.html#a864e1b9a292e8ecce170b256a0ebd1a6" title="Initializes a Legendre polynomial structure with the given precision." alt="" coords="613,120,839,145"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="563,130,599,130,599,135,563,135"/>
+<area shape="rect" id="Node000006" href="$mpfi__legendre__polynomial_8h.html#ad08847e47c95f5b32e7b86de67e9b2de" title="Initializes a Legendre polynomial workspace with the given precision." alt="" coords="613,170,839,210"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="538,150,611,165,610,170,537,155"/>
+<area shape="rect" id="Node000007" href="$mpfi__legendre__polynomial_8h.html#aeca938e23880cd8afeefd2af4d7d0830" title=" " alt="" coords="631,234,821,274"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="472,151,536,185,612,220,633,227,631,232,610,224,534,190,470,155"/>
+</map>

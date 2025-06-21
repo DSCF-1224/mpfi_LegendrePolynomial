@@ -3,8 +3,9 @@ var indexSectionsWithContent =
   0: "demnprtx",
   1: "m",
   2: "em",
-  3: "m",
-  4: "dnprtx"
+  3: "em",
+  4: "dnprtx",
+  5: "mn"
 };
 
 var indexSectionNames =
@@ -13,7 +14,8 @@ var indexSectionNames =
   1: "classes",
   2: "files",
   3: "functions",
-  4: "variables"
+  4: "variables",
+  5: "defines"
 };
 
 var indexSectionLabels =
@@ -22,6 +24,7 @@ var indexSectionLabels =
   1: "Data Structures",
   2: "Files",
   3: "Functions",
-  4: "Variables"
+  4: "Variables",
+  5: "Macros"
 };
 
