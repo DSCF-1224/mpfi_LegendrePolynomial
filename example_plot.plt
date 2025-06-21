@@ -1,4 +1,4 @@
-set output  ('precision_' . ARG1 . '_left.svg')
+set output  ('example/precision_' . ARG1 . '_left.svg')
 
 set title ('mpfr\_precision: ' . ARG1)
 set ylabel 'left'
@@ -11,7 +11,7 @@ plot for [i = 1:(|val_degree|)] \
 
 
 
-set output  ('precision_' . ARG1 . '_right.svg')
+set output  ('example/precision_' . ARG1 . '_right.svg')
 
 set title ('mpfr\_precision: ' . ARG1)
 set ylabel 'right'
@@ -24,7 +24,7 @@ plot for [i = 1:(|val_degree|)] \
 
 
 
-set output  ('precision_' . ARG1 . '_width.svg')
+set output  ('example/precision_' . ARG1 . '_width.svg')
 
 set title ('mpfr\_precision: ' . ARG1)
 set ytics 
