@@ -153,13 +153,13 @@ void mpfi_init2_LegendrePolynomialWorkspace(
 
 
 /**
- * @param result    Legendre polynomial of the target degree
- * @param degree    The target degree of Legendre polynomial
- * @param range     Interval [-1, 1]
- * @param x         Evaluation point
- * @param ref1      Legendre polynomial of the degree (n - 1)
- * @param ref2      Legendre polynomial of the degree (n - 2)
- * @param workspace Temporary storage used during polynomial computations
+ * @param[  out] result    Legendre polynomial of the target degree
+ * @param[in   ] degree    The target degree of Legendre polynomial
+ * @param[in   ] range     Interval [-1, 1]
+ * @param[in   ] x         Evaluation point
+ * @param[in   ] ref1      Legendre polynomial of the degree (n - 1)
+ * @param[in   ] ref2      Legendre polynomial of the degree (n - 2)
+ * @param[inout] workspace Temporary storage used during polynomial computations
  */
 static int mpfi_LegendrePolynomial_RecursiveSingleStep(
     /***/ /****/ mpfi_ptr                                  result    , //
@@ -338,11 +338,11 @@ int mpfi_LegendrePolynomial_Derivative(
 
 
 /**
- * @param initial_zero inital value of the zero point of the Legendre polynomial
- * @param mpfi_pi      Mathematical constant: pi; `mpfi_const_pi` must be applied before using this function
- * @param degree       The target degree of Legendre polynomial
- * @param node_id      selector of zero point
- * @param workspace    Temporary storage used during polynomial computations
+ * @param[  out] initial_zero inital value of the zero point of the Legendre polynomial
+ * @param[in   ] mpfi_pi      Mathematical constant: pi; `mpfi_const_pi` must be applied before using this function
+ * @param[in   ] degree       The target degree of Legendre polynomial
+ * @param[in   ] node_id      selector of zero point
+ * @param[inout] workspace    Temporary storage used during polynomial computations
  */
 int mpfi_LegendrePolynomial_InitializeZero(
     /***/ /****/ mpfi_ptr                                  initial_zero , //
