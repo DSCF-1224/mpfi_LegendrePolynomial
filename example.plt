@@ -25,6 +25,8 @@ array val_degree[23]
       val_degree[22] = 90
       val_degree[23] = 99
 
+set xlabel 'x'
+
 set key outside
 set key title 'degree'
 
