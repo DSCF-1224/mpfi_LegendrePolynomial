@@ -47,6 +47,10 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
 
 
+    mpfr_t diam;
+
+    mpfr_init( diam );
+
     mpfi_t step_x, minval_x;
 
     mpfi_init2( step_x   , precision );
@@ -83,16 +87,23 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
                 /**/ &workspace                               //
             );
 
+        mpfi_diam( diam , legendre_polynomial.polynomial_target );
+
         mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial.x                ->left  );
         mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial.x                ->right );
         mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial.polynomial_target->left  );
         mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial.polynomial_target->right );
+        mpfr_fprintf( output_filestream, "%Ra " , &diam                                         );
         mpfr_fprintf( output_filestream, "%d\n" ,  status                                       );
     }
 
 
 
     fclose(output_filestream);
+
+
+
+    mpfr_clear( diam     );
 
     mpfi_clear( step_x   );
     mpfi_clear( minval_x );
