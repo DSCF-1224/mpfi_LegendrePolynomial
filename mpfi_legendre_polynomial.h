@@ -27,7 +27,12 @@ struct mpfi_LegendrePolynomial_t{
 
 /**
  * @brief Clears the memory allocated for a Legendre polynomial structure.
+ * 
  * @param[in] legendre_polynomial_ptr Pointer to the Legendre polynomial structure
+ * 
+ * @see 
+ * - https://gitlab.inria.fr/mpfr/mpfr/-/blob/master/src/clear.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/clear.c
  */
 void mpfi_clear_LegendrePolynomial(struct mpfi_LegendrePolynomial_t *const legendre_polynomial_ptr) {
 
@@ -49,17 +54,19 @@ void mpfi_clear_LegendrePolynomial(struct mpfi_LegendrePolynomial_t *const legen
 
 
 /**
- * @brief Initializes a Legendre polynomial structure with the given precision.  
+ * @brief Initializes a Legendre polynomial structure with the given precision.
+ * 
  * @param[in] legendre_polynomial_ptr Pointer to the Legendre polynomial structure.
  * @param[in] precision Precision for the floating-point computations.
+ * 
+ * @see
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/interv_d.c
+ * - https://gitlab.inria.fr/mpfr/mpfr/-/blob/master/src/init2.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/init2.c
  */
 void mpfi_init2_LegendrePolynomial(
     /***/ struct mpfi_LegendrePolynomial_t *const legendre_polynomial_ptr , //
     const /****/ mpfr_prec_t                      precision               ) {
-
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/interv_d.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/init2.c
-    // https://gitlab.inria.fr/mpfr/mpfr/-/blob/master/src/init2.c
 
     if (legendre_polynomial_ptr) {
 
@@ -101,12 +108,14 @@ struct mpfi_LegendrePolynomialWorkspace_t {
 
 /**
  * @brief Clears the memory allocated for a Legendre polynomial workspace.
+ * 
  * @param[in] legendre_polynomial_Workspace_ptr Pointer to the workspace structure.
+ * 
+ * @see 
+ * - https://gitlab.inria.fr/mpfr/mpfr/-/blob/master/src/clear.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/clear.c
  */
 void mpfi_clear_LegendrePolynomialWorkspace(struct mpfi_LegendrePolynomialWorkspace_t *const legendre_polynomial_Workspace_ptr) {
-
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/clear.c
-    // https://gitlab.inria.fr/mpfr/mpfr/-/blob/master/src/clear.c
 
     if (legendre_polynomial_Workspace_ptr) {
 
@@ -125,15 +134,17 @@ void mpfi_clear_LegendrePolynomialWorkspace(struct mpfi_LegendrePolynomialWorksp
 
 /**
  * @brief Initializes a Legendre polynomial workspace with the given precision.
+ * 
  * @param[in] legendre_polynomial_Workspace_ptr Pointer to the workspace structure.
  * @param[in] precision Precision for the floating-point computations.
+ * 
+ * @see
+ * - https://gitlab.inria.fr/mpfr/mpfr/-/blob/master/src/init2.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/init2.c
  */
 void mpfi_init2_LegendrePolynomialWorkspace(
     /***/ struct mpfi_LegendrePolynomialWorkspace_t *const legendre_polynomial_Workspace_ptr , //
     const /****/ mpfr_prec_t                               precision                         ) {
-
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/init2.c
-    // https://gitlab.inria.fr/mpfr/mpfr/-/blob/master/src/init2.c
 
     if (legendre_polynomial_Workspace_ptr) {
 
@@ -160,6 +171,14 @@ void mpfi_init2_LegendrePolynomialWorkspace(
  * @param[in   ] ref1      Legendre polynomial of the degree (n - 1)
  * @param[in   ] ref2      Legendre polynomial of the degree (n - 2)
  * @param[inout] workspace Temporary storage used during polynomial computations
+ * 
+ * @see
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/div.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/is_inside.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/mul.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/predicates.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/set_ui.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/sub.c
  */
 static int mpfi_LegendrePolynomial_RecursiveSingleStep(
     /***/ /****/ mpfi_ptr                                  result    , //
@@ -169,13 +188,6 @@ static int mpfi_LegendrePolynomial_RecursiveSingleStep(
     /***/ /****/ mpfi_srcptr                               ref1      , //
     /***/ /****/ mpfi_srcptr                               ref2      , //
     /***/ struct mpfi_LegendrePolynomialWorkspace_t *const workspace ) {
-
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/div.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/is_inside.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/mul.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/predicates.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/set_ui.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/sub.c
 
     // temp1 <- n
     mpfi_set_ui( workspace->temp1 , degree );
@@ -276,6 +288,13 @@ int mpfi_LegendrePolynomial_Recursive(
  * @param[in] x                   Evaluation point
  * @param[in] legendre_polynomial Legendre polynomial at the evaluation point
  * @param[in] workspace           Temporary storage used during polynomial computations.
+ * 
+ * @see
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/div.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/mul.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/mul_ui.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/set_ui.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/sub.c
  */
 int mpfi_LegendrePolynomial_Derivative(
     /***/ /****/ mpfi_ptr                                  derivative          , //
@@ -292,12 +311,6 @@ int mpfi_LegendrePolynomial_Derivative(
         return EXIT_FAILURE;
 
     }
-
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/div.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/mul.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/mul_ui.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/set_ui.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/sub.c
 
     // temp1 <- 1
     mpfi_set_ui( workspace->temp1 , 1UL ); 
@@ -343,6 +356,14 @@ int mpfi_LegendrePolynomial_Derivative(
  * @param[in   ] degree       The target degree of Legendre polynomial
  * @param[in   ] node_id      selector of zero point
  * @param[inout] workspace    Temporary storage used during polynomial computations
+ * 
+ * @see
+ * https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/add_d.c
+ * https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/cos.c
+ * https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/div.c
+ * https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/mul.c
+ * https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/set_ui.c
+ * https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/sub_d.c
  */
 int mpfi_LegendrePolynomial_InitializeZero(
     /***/ /****/ mpfi_ptr                                  initial_zero , //
@@ -350,13 +371,6 @@ int mpfi_LegendrePolynomial_InitializeZero(
     const /****/ unsigned long                             degree       , //
     const /****/ unsigned long                             node_id      , //
     /***/ struct mpfi_LegendrePolynomialWorkspace_t *const workspace    ) {
-
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/add_d.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/cos.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/div.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/mul.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/set_ui.c
-    // https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/sub_d.c
 
     // temp1 <- k
     mpfi_set_ui( workspace->temp1 , node_id );
