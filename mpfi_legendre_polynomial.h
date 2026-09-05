@@ -90,6 +90,28 @@ void mpfi_init2_LegendrePolynomial(
 
 
 /**
+ * @brief Checks whether the evaluation argument is bounded and lies within the domain.
+ * 
+ * @param[in] x     Evaluation argument of the Legendre polynomial
+ * @param[in] range Interval [-1,1]
+ * 
+ * @return Nonzero if x is bounded and inside range; zero otherwise.
+ * 
+ * @see
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/is_inside.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/predicates.c
+ */
+static int mpfi_is_valid_LegendrePolynomial(
+    mpfi_srcptr x     , //
+    mpfi_srcptr range ) {
+
+    return mpfi_bounded_p(x) && mpfi_is_inside(x, range);
+
+}
+
+
+
+/**
  * @struct mpfi_LegendrePolynomialWorkspace_t
  * @brief Structure for temporary storage used during polynomial computations.
  */
