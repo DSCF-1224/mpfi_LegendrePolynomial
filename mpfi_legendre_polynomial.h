@@ -267,10 +267,20 @@ int mpfi_LegendrePolynomial_Recursive(
     /***/ struct mpfi_LegendrePolynomialWorkspace_t *const workspace ) {
 
 
-    if ( (degree < 2UL) || !workspace || !range || !x || !ref1 || !ref2 ) {
-        mpfr_set_nan(&result->left);
-        mpfr_set_nan(&result->right);
+    if ( 
+        (degree < 2UL) ||
+        !workspace     ||
+        !range         ||
+        !x             ||
+        !ref1          ||
+        !ref2          ||
+        !mpfi_is_valid_LegendrePolynomial(x, range) ) {
+
+        mpfr_set_nan( &result->left  );
+        mpfr_set_nan( &result->right );
+
         return EXIT_FAILURE;
+
     }
 
 
