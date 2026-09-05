@@ -17,9 +17,9 @@ struct mpfi_LegendrePolynomial_t{
     mpfi_t polynomial_ref1;   /**< Legendre polynomial of the degree (n - 1) */
     mpfi_t polynomial_ref2;   /**< Legendre polynomial of the degree (n - 2) */
     mpfi_t range;             /**< Interval [-1, 1] */
-    mpfi_t x;                 /**< Evaluation point */
-    mpfi_t x_copy;            /**< Copy of the evaluation point */
-    mpfi_t x_diff;            /**< Difference of the evaluation point */
+    mpfi_t x;                 /**< Evaluation argument of the Legendre polynomial */
+    mpfi_t x_copy;            /**< Copy of the evaluation argument */
+    mpfi_t x_diff;            /**< Difference of the evaluation argument */
 
 };
 
