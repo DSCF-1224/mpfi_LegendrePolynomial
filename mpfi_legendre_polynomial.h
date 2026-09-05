@@ -325,7 +325,7 @@ int mpfi_LegendrePolynomial_Derivative(
     /***/ struct mpfi_LegendrePolynomialWorkspace_t *const workspace           ) {
 
     // validation: x
-    if ( !mpfi_bounded_p( legendre_polynomial->x ) || !mpfi_is_inside(legendre_polynomial->x, legendre_polynomial->range) ) {
+    if ( !mpfi_is_valid_LegendrePolynomial(legendre_polynomial->x, legendre_polynomial->range) ) {
 
         mpfr_set_nan( &(derivative->left  ) );
         mpfr_set_nan( &(derivative->right ) );
