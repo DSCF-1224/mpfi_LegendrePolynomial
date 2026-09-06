@@ -196,6 +196,7 @@ void mpfi_init2_LegendrePolynomialWorkspace(
  * 
  * @see
  * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/div.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/intersect.c
  * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/is_inside.c
  * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/mul.c
  * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/predicates.c
@@ -235,15 +236,16 @@ static int mpfi_LegendrePolynomial_RecursiveSingleStep(
     // result <- ( temp4 - temp3 ) / n
     mpfi_div( result , workspace->temp2 , workspace->temp1 );
 
+    // validation: result (before clipping)
+    if ( mpfi_nan_p(result) || mpfi_inf_p(result) ) return EXIT_FAILURE;
 
-    if ( mpfi_nan_p(result) || mpfi_inf_p(result) || !mpfi_is_inside(result, range) ) {
+    // result <- result \cap range
+    mpfi_intersect(result, result, range);
 
-        return EXIT_FAILURE;
-
-    }
+    // validation: result (after clipping)
+    if ( mpfi_is_empty(result) ) return EXIT_FAILURE;
 
     return EXIT_SUCCESS;
-
 }
 
 
