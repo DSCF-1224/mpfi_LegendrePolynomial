@@ -128,11 +128,10 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 int example_mpfi_LegendrePolynomial_Recursive(const mpfr_prec_t precision)
 {
     static const unsigned long degrees[] = {
-         1UL,  2UL,  3UL,  4UL,  5UL,
-         9UL, 19UL, 20UL, 29UL, 30UL,
-        39UL, 40UL, 49UL, 50UL, 59UL,
-        60UL, 69UL, 70UL, 79UL, 80UL,
-        89UL, 90UL, 99UL,
+        // Low-degree cases (1-10): covers every degree in the 1-digit range
+         1UL,  2UL,  3UL,  4UL,  5UL,  6UL,  7UL,  8UL,  9UL, 10UL,
+        // Multiples of 11 (2-digit range): even/odd degrees balanced
+        11UL, 22UL, 33UL, 44UL, 55UL, 66UL, 77UL, 88UL, 99UL,
     };
 
     for (size_t i = 0; i < ( sizeof(degrees) / sizeof(degrees[0]) ); i++)
