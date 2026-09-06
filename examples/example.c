@@ -5,7 +5,7 @@
 
 
 /// @brief Parameter to set `step_x`
-#define NUM_INTERVALS 255UL
+#define NUM_INTERVALS 2048UL
 
 
 
