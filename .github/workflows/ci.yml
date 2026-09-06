@@ -39,7 +39,7 @@ jobs:
           gnuplot example.plt
 
       - name: Upload example plots
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: example-plots
           path: example
@@ -83,7 +83,7 @@ jobs:
         run: doxygen Doxyfile
 
       - name: Upload documentation
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: doxygen-html
           path: html
