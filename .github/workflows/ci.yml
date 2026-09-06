@@ -28,21 +28,20 @@ jobs:
         run: gnuplot --version
 
       - name: Compile Example
-        run: gcc example.c -Wall -Wextra -lgmp -lmpfr -lmpfi
+        run: gcc examples/example.c -I. -Wall -Wextra -Werror -lgmp -lmpfr -lmpfi
 
       - name: Run Example
         run: ./a.out
 
       - name: Run Gnuplot
         run: |
-          mkdir example
-          gnuplot example.plt
+          gnuplot examples/example.plt
 
       - name: Upload example plots
         uses: actions/upload-artifact@v7
         with:
           name: example-plots
-          path: example
+          path: examples/*.svg
           if-no-files-found: error
 
   doxygen:

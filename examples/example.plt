@@ -35,8 +35,8 @@ unset colorbox
 
 set terminal svg
 
-call 'example_plot.plt' '024'
-call 'example_plot.plt' '053'
-call 'example_plot.plt' '113'
+call 'examples/example_plot.plt' '024'
+call 'examples/example_plot.plt' '053'
+call 'examples/example_plot.plt' '113'
 
 set output
