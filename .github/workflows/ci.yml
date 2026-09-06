@@ -1,0 +1,97 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+
+  compile_and_run_example:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify gcc installation
+        run: gcc --version
+
+      - name: Install MPFI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libmpfi-dev
+
+      - name: Install Gnuplot
+        run: sudo apt-get install -y gnuplot
+
+      - name: Verify Gnuplot installation
+        run: gnuplot --version
+
+      - name: Compile Example
+        run: gcc example.c -Wall -Wextra -lgmp -lmpfr -lmpfi
+
+      - name: Run Example
+        run: ./a.out
+
+      - name: Run Gnuplot
+        run: |
+          mkdir example
+          gnuplot example.plt
+
+      - name: Upload example plots
+        uses: actions/upload-artifact@v4
+        with:
+          name: example-plots
+          path: example
+          if-no-files-found: error
+
+  doxygen:
+
+    needs: compile_and_run_example
+
+    runs-on: ubuntu-latest
+
+    if: ${{ github.ref == 'refs/heads/main' }}
+
+    permissions:
+      contents: write
+
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Doxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen
+
+      - name: Verify Doxygen installation
+        run: doxygen --version
+
+      - name: Install Graphviz
+        run: sudo apt-get install -y graphviz
+
+      - name: Verify Graphviz installation
+        run: dot -V
+
+      - name: Run Doxygen
+        run: doxygen Doxyfile
+
+      - name: Upload documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: doxygen-html
+          path: html
+          if-no-files-found: error
+
+      - name: Deploy documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./html
+          publish_branch: gh-pages
