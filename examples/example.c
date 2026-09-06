@@ -50,7 +50,7 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
     mpfr_t diam;
 
-    mpfr_init( diam );
+    mpfr_init2(diam, precision);
 
     mpfi_t step_x, minval_x;
 
