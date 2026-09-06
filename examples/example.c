@@ -35,7 +35,7 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 {
     char output_filename[FILENAME_MAX];
 
-    snprintf(output_filename, sizeof(output_filename), "examples/precision_%3.3ld_degree_%3.3ld.dat", precision, degree);
+    snprintf(output_filename, sizeof(output_filename), "examples/precision_%3.3ld_degree_%3.3lu.dat", precision, degree);
 
     FILE *output_filestream = fopen(output_filename, "w");
 
