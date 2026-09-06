@@ -9,6 +9,23 @@
 
 
 
+static void fprintf_result_LegendrePolynomial(
+    /***/ /****/ FILE                      *const output_filestream   , //
+    const struct mpfi_LegendrePolynomial_t *const legendre_polynomial , //
+    /***/ /****/ mpfr_srcptr               /****/ diam                , //
+    const /****/ int                       /****/ status              ) {
+
+    mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial -> x                 -> left  );
+    mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial -> x                 -> right );
+    mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial -> polynomial_target -> left  );
+    mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial -> polynomial_target -> right );
+    mpfr_fprintf( output_filestream, "%Ra " ,  diam                                              );
+    mpfr_fprintf( output_filestream, "%d\n" ,  status                                            );
+
+}
+
+
+
 /**
  * @brief Run example how to use mpfi_LegendrePolynomial_Recursive
  * <ol>
@@ -90,12 +107,7 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
         mpfi_diam( diam , legendre_polynomial.polynomial_target );
 
-        mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial.x                ->left  );
-        mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial.x                ->right );
-        mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial.polynomial_target->left  );
-        mpfr_fprintf( output_filestream, "%Ra " , &legendre_polynomial.polynomial_target->right );
-        mpfr_fprintf( output_filestream, "%Ra " , &diam                                         );
-        mpfr_fprintf( output_filestream, "%d\n" ,  status                                       );
+        fprintf_result_LegendrePolynomial(output_filestream, &legendre_polynomial, diam, status);
     }
 
 
