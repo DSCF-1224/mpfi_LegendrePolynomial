@@ -17,9 +17,9 @@ struct mpfi_LegendrePolynomial_t{
     mpfi_t polynomial_ref1;   /**< Legendre polynomial of the degree (n - 1) */
     mpfi_t polynomial_ref2;   /**< Legendre polynomial of the degree (n - 2) */
     mpfi_t range;             /**< Interval [-1, 1] */
-    mpfi_t x;                 /**< Evaluation point */
-    mpfi_t x_copy;            /**< Copy of the evaluation point */
-    mpfi_t x_diff;            /**< Difference of the evaluation point */
+    mpfi_t x;                 /**< Evaluation argument of the Legendre polynomial */
+    mpfi_t x_copy;            /**< Copy of the evaluation argument */
+    mpfi_t x_diff;            /**< Difference of the evaluation argument */
 
 };
 
@@ -84,6 +84,28 @@ void mpfi_init2_LegendrePolynomial(
         mpfi_interv_d( legendre_polynomial_ptr->range, -1.0, 1.0 );
 
     }
+
+}
+
+
+
+/**
+ * @brief Checks whether the evaluation argument is bounded and lies within the domain.
+ * 
+ * @param[in] x     Evaluation argument of the Legendre polynomial
+ * @param[in] range Interval [-1,1]
+ * 
+ * @return Nonzero if x is bounded and inside range; zero otherwise.
+ * 
+ * @see
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/is_inside.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/predicates.c
+ */
+static int mpfi_is_valid_LegendrePolynomial(
+    mpfi_srcptr x     , //
+    mpfi_srcptr range ) {
+
+    return mpfi_bounded_p(x) && mpfi_is_inside(x, range);
 
 }
 
@@ -174,6 +196,7 @@ void mpfi_init2_LegendrePolynomialWorkspace(
  * 
  * @see
  * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/div.c
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/intersect.c
  * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/is_inside.c
  * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/mul.c
  * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/predicates.c
@@ -198,30 +221,36 @@ static int mpfi_LegendrePolynomial_RecursiveSingleStep(
     // temp3 <- 2n - 1
     mpfi_set_ui( workspace->temp3 , (degree + degree - 1UL) );
 
-    // temp4 <- ( 2n - 1 ) * x
+    // temp4 <- temp3 * x
+    //       <- ( 2n - 1 ) * x
     mpfi_mul( workspace->temp4 , workspace->temp3 , x );
 
-    // temp3 <- ( 2n - 1 ) * lp[ n - 1 ] * x
+    // temp3 <- temp4          * lp[ n - 1 ]
+    //       <- ( 2n - 1 ) * x * lp[ n - 1 ]
     mpfi_mul( workspace->temp3 , workspace->temp4 , ref1 );
 
-    // temp3 <- ( n - 1 ) * lp[ n - 2 ]
+    // temp4 <- temp2     * lp[ n - 2 ]
+    //       <- ( n - 1 ) * lp[ n - 2 ]
     mpfi_mul( workspace->temp4 , workspace->temp2 , ref2 );
 
     // temp2 <- temp3 - temp4
+    //       <- ( 2n - 1 ) * x * lp[ n - 1 ] - ( n - 1 ) * lp[ n - 2 ]
     mpfi_sub( workspace->temp2 , workspace->temp3 , workspace->temp4 );
 
-    // result <- ( temp4 - temp3 ) / n
+    // result <- temp2 / temp1
+    //        <- { ( 2n - 1 ) * x * lp[ n - 1 ] - ( n - 1 ) * lp[ n - 2 ] } / n
     mpfi_div( result , workspace->temp2 , workspace->temp1 );
 
+    // validation: result (before clipping)
+    if ( mpfi_nan_p(result) || mpfi_inf_p(result) ) return EXIT_FAILURE;
 
-    if ( mpfi_nan_p(result) || mpfi_inf_p(result) || !mpfi_is_inside(result, range) ) {
+    // result <- result \cap range
+    mpfi_intersect(result, result, range);
 
-        return EXIT_FAILURE;
-
-    }
+    // validation: result (after clipping)
+    if ( mpfi_is_empty(result) ) return EXIT_FAILURE;
 
     return EXIT_SUCCESS;
-
 }
 
 
@@ -245,10 +274,20 @@ int mpfi_LegendrePolynomial_Recursive(
     /***/ struct mpfi_LegendrePolynomialWorkspace_t *const workspace ) {
 
 
-    if ( (degree < 2UL) || !workspace || !range || !x || !ref1 || !ref2 ) {
-        mpfr_set_nan(&result->left);
-        mpfr_set_nan(&result->right);
+    if ( 
+        (degree < 2UL) ||
+        !workspace     ||
+        !range         ||
+        !x             ||
+        !ref1          ||
+        !ref2          ||
+        !mpfi_is_valid_LegendrePolynomial(x, range) ) {
+
+        mpfr_set_nan( &result->left  );
+        mpfr_set_nan( &result->right );
+
         return EXIT_FAILURE;
+
     }
 
 
@@ -303,7 +342,7 @@ int mpfi_LegendrePolynomial_Derivative(
     /***/ struct mpfi_LegendrePolynomialWorkspace_t *const workspace           ) {
 
     // validation: x
-    if ( !mpfi_bounded_p( legendre_polynomial->x ) || !mpfi_is_inside(legendre_polynomial->x, legendre_polynomial->range) ) {
+    if ( !mpfi_is_valid_LegendrePolynomial(legendre_polynomial->x, legendre_polynomial->range) ) {
 
         mpfr_set_nan( &(derivative->left  ) );
         mpfr_set_nan( &(derivative->right ) );
