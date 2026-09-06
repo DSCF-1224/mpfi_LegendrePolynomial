@@ -1,0 +1,117 @@
+name: ci
+
+on: [push, pull_request]
+
+jobs:
+
+  compile_and_run_example:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Verify gcc installation
+        run: gcc --version
+
+      - name: Install MPFI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libmpfi-dev
+
+      - name: Install Gnuplot
+        run: sudo apt-get install -y gnuplot
+
+      - name: Verify Gnuplot installation
+        run: gnuplot --version
+
+      - name: Compile Example
+        run: gcc example.c -Wall -Wextra -lgmp -lmpfr -lmpfi
+
+      - name: Run Example
+        run: ./a.out
+
+      - name: Run Gnuplot
+        run: |
+          mkdir example
+          gnuplot example.plt
+
+      - name: Upload example plots
+        uses: actions/upload-artifact@v7
+        with:
+          name: example-plots
+          path: example
+          if-no-files-found: error
+
+  doxygen:
+
+    needs: compile_and_run_example
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install Doxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen
+
+      - name: Verify Doxygen installation
+        run: doxygen --version
+
+      - name: Install Graphviz
+        run: sudo apt-get install -y graphviz
+
+      - name: Verify Graphviz installation
+        run: dot -V
+
+      - name: Run Doxygen
+        run: doxygen Doxyfile
+
+      - name: Upload documentation
+        uses: actions/upload-artifact@v7
+        with:
+          name: doxygen-html
+          path: html
+          if-no-files-found: error
+
+      - name: Upload GitHub Pages artifact
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: html
+
+  deploy-pages:
+
+    needs: doxygen
+
+    if: ${{ github.ref == 'refs/heads/main' }}
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+
+    steps:
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
