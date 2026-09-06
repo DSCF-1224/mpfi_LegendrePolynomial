@@ -42,7 +42,7 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
     if (output_filestream == NULL)
     {
-        fprintf(stderr, "Failed to open `%s`", output_filename);
+        fprintf(stderr, "Failed to open `%s`\n", output_filename);
         return EXIT_FAILURE;
     }
 
