@@ -7,12 +7,6 @@
 /// @brief Parameter to set `step_x`
 #define NUM_INTERVALS 255UL
 
-/// @brief Specify the range to compute legendre polynomial
-#define MINVAL_X -1L
-
-/// @brief Specify the range to compute legendre polynomial
-#define MAXVAL_X  1L
-
 
 
 /**
@@ -52,10 +46,9 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
     mpfr_init2(diam, precision);
 
-    mpfi_t step_x, minval_x;
+    mpfi_t step_x;
 
-    mpfi_init2( step_x   , precision );
-    mpfi_init2( minval_x , precision );
+    mpfi_init2(step_x, precision);
 
     struct mpfi_LegendrePolynomial_t          legendre_polynomial;
     struct mpfi_LegendrePolynomialWorkspace_t workspace;
@@ -65,17 +58,24 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
 
 
-    mpfi_set_si( minval_x, MINVAL_X );
+    // diam is reused here to compute the range width
+    mpfi_diam_abs(diam, legendre_polynomial.range);
 
-    mpfi_set_si( workspace.temp1 , (MAXVAL_X - MINVAL_X)                 );
-    mpfi_div_ui( step_x          , workspace.temp1       , NUM_INTERVALS );
+    mpfi_set_fr(step_x, diam);
+
+    mpfi_div_ui(step_x, step_x, NUM_INTERVALS);
 
 
 
     for (unsigned long i = 0; i < NUM_INTERVALS; i++)
     {
-        mpfi_mul_ui( workspace.temp1       , step_x   , i               );
-        mpfi_add   ( legendre_polynomial.x , minval_x , workspace.temp1 );
+        mpfi_mul_ui( workspace.temp1 , //
+        /**********/ step_x          , //
+        /**********/ i                 );
+
+        mpfi_add_fr(  legendre_polynomial.x           , //
+        /**********/  workspace.temp1                 , //
+        /**********/ &legendre_polynomial.range->left   );
 
         const int status =
             mpfi_LegendrePolynomial_Recursive(
@@ -104,10 +104,9 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
 
 
-    mpfr_clear( diam     );
+    mpfr_clear(diam);
 
-    mpfi_clear( step_x   );
-    mpfi_clear( minval_x );
+    mpfi_clear(step_x);
 
     mpfi_clear_LegendrePolynomial          ( &legendre_polynomial );
     mpfi_clear_LegendrePolynomialWorkspace ( &workspace           );
