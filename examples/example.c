@@ -35,7 +35,7 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 {
     char output_filename[FILENAME_MAX];
 
-    snprintf(output_filename, sizeof(output_filename), "precision_%3.3ld_degree_%3.3ld.dat", precision, degree);
+    snprintf(output_filename, sizeof(output_filename), "examples/precision_%3.3ld_degree_%3.3ld.dat", precision, degree);
 
     FILE *output_filestream = fopen(output_filename, "w");
 
@@ -158,9 +158,9 @@ int example_mpfi_LegendrePolynomial_Recursive(const mpfr_prec_t precision)
 
 /**
  * @note
- * How to compile:
+ * How to compile (from the repository root):
  * ```
- * gcc example.c -Wall -Wextra -lgmp -lmpfr -lmpfi
+ * gcc examples/example.c -I. -Wall -Wextra -Werror -lgmp -lmpfr -lmpfi
  * ```
  * @version Experimental
  */
