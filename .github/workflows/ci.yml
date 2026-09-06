@@ -52,11 +52,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write
-
-    concurrency:
-      group: "pages"
-      cancel-in-progress: false
+      contents: read
 
     steps:
 
@@ -87,10 +83,35 @@ jobs:
           path: html
           if-no-files-found: error
 
-      - name: Deploy documentation
+      - name: Upload GitHub Pages artifact
         if: ${{ github.ref == 'refs/heads/main' }}
-        uses: peaceiris/actions-gh-pages@v3
+        uses: actions/upload-pages-artifact@v5
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./html
-          publish_branch: gh-pages
+          path: html
+
+  deploy-pages:
+
+    needs: doxygen
+
+    if: ${{ github.ref == 'refs/heads/main' }}
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+
+    steps:
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
