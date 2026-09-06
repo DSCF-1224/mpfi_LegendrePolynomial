@@ -221,19 +221,24 @@ static int mpfi_LegendrePolynomial_RecursiveSingleStep(
     // temp3 <- 2n - 1
     mpfi_set_ui( workspace->temp3 , (degree + degree - 1UL) );
 
-    // temp4 <- ( 2n - 1 ) * x
+    // temp4 <- temp3 * x
+    //       <- ( 2n - 1 ) * x
     mpfi_mul( workspace->temp4 , workspace->temp3 , x );
 
-    // temp3 <- ( 2n - 1 ) * lp[ n - 1 ] * x
+    // temp3 <- temp4          * lp[ n - 1 ]
+    //       <- ( 2n - 1 ) * x * lp[ n - 1 ]
     mpfi_mul( workspace->temp3 , workspace->temp4 , ref1 );
 
-    // temp3 <- ( n - 1 ) * lp[ n - 2 ]
+    // temp4 <- temp2     * lp[ n - 2 ]
+    //       <- ( n - 1 ) * lp[ n - 2 ]
     mpfi_mul( workspace->temp4 , workspace->temp2 , ref2 );
 
     // temp2 <- temp3 - temp4
+    //       <- ( 2n - 1 ) * x * lp[ n - 1 ] - ( n - 1 ) * lp[ n - 2 ]
     mpfi_sub( workspace->temp2 , workspace->temp3 , workspace->temp4 );
 
-    // result <- ( temp4 - temp3 ) / n
+    // result <- temp2 / temp1
+    //        <- { ( 2n - 1 ) * x * lp[ n - 1 ] - ( n - 1 ) * lp[ n - 2 ] } / n
     mpfi_div( result , workspace->temp2 , workspace->temp1 );
 
     // validation: result (before clipping)
