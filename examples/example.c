@@ -84,6 +84,10 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
 
 
+    int status_total = EXIT_SUCCESS;
+
+
+
     // -1 <= x < +1
     for (unsigned long i = 0; i < NUM_INTERVALS; i++)
     {
@@ -109,6 +113,8 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
         mpfi_diam( diam , legendre_polynomial.polynomial_target );
 
         fprintf_result_LegendrePolynomial(output_filestream, &legendre_polynomial, diam, status);
+
+        if (status) status_total = EXIT_FAILURE;
     }
 
     // x = +1
@@ -129,6 +135,7 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
     fprintf_result_LegendrePolynomial(output_filestream, &legendre_polynomial, diam, status);
 
+    if (status) status_total = EXIT_FAILURE;
 
 
 
@@ -145,7 +152,7 @@ int example_mpfi_LegendrePolynomial_Recursive_unit(const mpfr_prec_t precision, 
 
 
 
-    return EXIT_SUCCESS;
+    return status_total;
 }
 
 
