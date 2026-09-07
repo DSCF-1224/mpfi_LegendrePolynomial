@@ -206,11 +206,16 @@ int main(void)
     printf( "MPFR VERSION; %s\n", mpfr_get_version() );
     printf( "MPFI VERSION; %s\n", mpfi_get_version() );
 
-    if ( example_mpfi_LegendrePolynomial_Recursive(  24UL ) ) return EXIT_FAILURE;
-    if ( example_mpfi_LegendrePolynomial_Recursive(  53UL ) ) return EXIT_FAILURE;
-    if ( example_mpfi_LegendrePolynomial_Recursive( 113UL ) ) return EXIT_FAILURE;
+    int status_total = EXIT_SUCCESS;
 
-    printf("The example completed successfully.\n");
+    if ( example_mpfi_LegendrePolynomial_Recursive(  24UL ) ) status_total = EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive(  53UL ) ) status_total = EXIT_FAILURE;
+    if ( example_mpfi_LegendrePolynomial_Recursive( 113UL ) ) status_total = EXIT_FAILURE;
 
-    return EXIT_SUCCESS;
+    if (status_total == EXIT_SUCCESS)
+    {
+        printf("The example completed successfully.\n");
+    }
+
+    return status_total;
 }
