@@ -172,15 +172,22 @@ int example_mpfi_LegendrePolynomial_Recursive(const mpfr_prec_t precision)
         11UL, 22UL, 33UL, 44UL, 55UL, 66UL, 77UL, 88UL, 99UL,
     };
 
+
+
+    int status_total = EXIT_SUCCESS;
+
     for (size_t i = 0; i < ( sizeof(degrees) / sizeof(degrees[0]) ); i++)
     {
-        if ( example_mpfi_LegendrePolynomial_Recursive_unit(precision, degrees[i]) )
+        const int status = example_mpfi_LegendrePolynomial_Recursive_unit(precision, degrees[i]);
+
+        if (status)
         {
-            return EXIT_FAILURE;
+            fprintf(stderr, "Failed: precision=%ld, degree=%lu\n", precision, degrees[i]);
+            status_total = EXIT_FAILURE;
         }
     }
 
-    return EXIT_SUCCESS;
+    return status_total;
 }
 
 
