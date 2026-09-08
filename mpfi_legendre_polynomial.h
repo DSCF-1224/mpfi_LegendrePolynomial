@@ -26,6 +26,23 @@ static void mpfi_LegendrePolynomial_ComputeDegree0(mpfi_ptr result) {
 
 
 
+/**
+ * @brief Computes the Legendre polynomial of degree 1: P_1(x) = x.
+ * 
+ * @param[out] result Legendre polynomial of degree 1
+ * @param[in ] x      Evaluation argument of the Legendre polynomial
+ * 
+ * @see 
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/set.c
+ */
+static void mpfi_LegendrePolynomial_ComputeDegree1(mpfi_ptr result, mpfi_srcptr x) {
+
+    mpfi_set(result, x);
+
+}
+
+
+
 struct mpfi_LegendrePolynomial_t{
 
     mpfi_t derivative;        /**< First derivative of the Legendre polynomial */
@@ -308,7 +325,7 @@ int mpfi_LegendrePolynomial_Recursive(
 
 
     mpfi_LegendrePolynomial_ComputeDegree0(ref2);
-    mpfi_set    ( ref1, x   );
+    mpfi_LegendrePolynomial_ComputeDegree1(ref1, x);
 
     for (unsigned long i = 2UL; i <= degree; i++) {
 
