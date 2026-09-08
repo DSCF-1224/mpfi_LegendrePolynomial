@@ -10,6 +10,22 @@
 
 
 
+/**
+ * @brief Computes the Legendre polynomial of degree 0: P_0(x) = 1.
+ * 
+ * @param[out] result Legendre polynomial of degree 0
+ * 
+ * @see 
+ * - https://gitlab.inria.fr/mpfi/mpfi/-/blob/master/src/set_ui.c
+ */
+static void mpfi_LegendrePolynomial_ComputeDegree0(mpfi_ptr result) {
+
+    mpfi_set_ui(result, 1UL);
+
+}
+
+
+
 struct mpfi_LegendrePolynomial_t{
 
     mpfi_t derivative;        /**< First derivative of the Legendre polynomial */
@@ -291,7 +307,7 @@ int mpfi_LegendrePolynomial_Recursive(
     }
 
 
-    mpfi_set_ui ( ref2, 1UL );
+    mpfi_LegendrePolynomial_ComputeDegree0(ref2);
     mpfi_set    ( ref1, x   );
 
     for (unsigned long i = 2UL; i <= degree; i++) {
