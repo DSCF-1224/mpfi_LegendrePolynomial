@@ -355,6 +355,70 @@ int mpfi_LegendrePolynomial_Recursive(
 
 
 /**
+ * @brief Computes the Legendre polynomial for any degree, dispatching
+ *        to the degree 0/1 computation or to the recursive
+ *        computation depending on the requested degree.
+ * 
+ * @param[in] result    Legendre polynomial of the target degree (n)
+ * @param[in] ref1      Legendre polynomial of the degree (n - 1); set to NaN if undefined for the given degree
+ * @param[in] ref2      Legendre polynomial of the degree (n - 2); set to NaN if undefined for the given degree
+ * @param[in] degree    The target degree of Legendre polynomial
+ * @param[in] range     Interval [-1, 1]
+ * @param[in] x         Evaluation argument of the Legendre polynomial
+ * @param[in] workspace Temporary storage used during polynomial computations; unused if degree < 2
+ */
+int mpfi_LegendrePolynomial(
+    /***/ /****/ mpfi_ptr                                  result    , //
+    /***/ /****/ mpfi_ptr                                  ref1      , //
+    /***/ /****/ mpfi_ptr                                  ref2      , //
+    const /****/ unsigned long                             degree    , //
+    /***/ /****/ mpfi_srcptr                               range     , //
+    const /****/ mpfi_srcptr                               x         , //
+    /***/ struct mpfi_LegendrePolynomialWorkspace_t *const workspace ) {
+
+    if ( degree >= 2UL ) {
+        return mpfi_LegendrePolynomial_Recursive(result, ref1, ref2, degree, range, x, workspace);
+    }
+
+    if ( !ref1 || !ref2 || !range || !x || !mpfi_is_valid_LegendrePolynomial(x, range) ) {
+        mpfr_set_nan(&result->left);
+        mpfr_set_nan(&result->right);
+        return EXIT_FAILURE;
+    }
+
+    if (degree == 0UL) {
+
+        // P_0
+        mpfi_LegendrePolynomial_ComputeDegree0(result);
+
+        // P_{-1}: undefined
+        mpfr_set_nan(&ref1->left);
+        mpfr_set_nan(&ref1->right); 
+
+        // P_{-2}: undefined
+        mpfr_set_nan(&ref2->left);
+        mpfr_set_nan(&ref2->right);
+
+    } else { // degree == 1UL
+
+        // P_1
+        mpfi_LegendrePolynomial_ComputeDegree1(result, x);
+
+        // P_0
+        mpfi_LegendrePolynomial_ComputeDegree0(ref1);
+
+        // P_{-1}: undefined
+        mpfr_set_nan(&ref2->left);
+        mpfr_set_nan(&ref2->right);
+
+    }
+
+    return EXIT_SUCCESS;
+}
+
+
+
+/**
  * @param[in] derivative          First derivative of the Legendre polynomial of the target degree (n)
  * @param[in] degree              The target degree of Legendre polynomial
  * @param[in] x                   Evaluation point
