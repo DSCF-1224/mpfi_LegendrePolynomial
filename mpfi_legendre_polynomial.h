@@ -11,6 +11,24 @@
 
 
 /**
+ * @brief Sets both endpoints of an interval to NaN.
+ * 
+ * @param[out] x Interval to be set to NaN
+ * 
+ * @see 
+ * - https://gitlab.inria.fr/mpfr/mpfr/-/blob/master/src/mpfr-impl.h
+ * - https://gitlab.inria.fr/mpfr/mpfr/-/blob/master/src/set_nan.c
+ */
+static void mpfi_LegendrePolynomial_SetNaN(mpfi_ptr x) {
+
+    mpfr_set_nan( &x->left  );
+    mpfr_set_nan( &x->right );
+
+}
+
+
+
+/**
  * @brief Computes the Legendre polynomial of degree 0: P_0(x) = 1.
  * 
  * @param[out] result Legendre polynomial of degree 0
@@ -316,8 +334,7 @@ int mpfi_LegendrePolynomial_Recursive(
         !ref2          ||
         !mpfi_is_valid_LegendrePolynomial(x, range) ) {
 
-        mpfr_set_nan( &result->left  );
-        mpfr_set_nan( &result->right );
+        mpfi_LegendrePolynomial_SetNaN(result);
 
         return EXIT_FAILURE;
 
@@ -381,9 +398,11 @@ int mpfi_LegendrePolynomial(
     }
 
     if ( !ref1 || !ref2 || !range || !x || !mpfi_is_valid_LegendrePolynomial(x, range) ) {
-        mpfr_set_nan(&result->left);
-        mpfr_set_nan(&result->right);
+
+        mpfi_LegendrePolynomial_SetNaN(result);
+
         return EXIT_FAILURE;
+
     }
 
     if (degree == 0UL) {
@@ -392,12 +411,10 @@ int mpfi_LegendrePolynomial(
         mpfi_LegendrePolynomial_ComputeDegree0(result);
 
         // P_{-1}: undefined
-        mpfr_set_nan(&ref1->left);
-        mpfr_set_nan(&ref1->right); 
+        mpfi_LegendrePolynomial_SetNaN(ref1);
 
         // P_{-2}: undefined
-        mpfr_set_nan(&ref2->left);
-        mpfr_set_nan(&ref2->right);
+        mpfi_LegendrePolynomial_SetNaN(ref2);
 
     } else { // degree == 1UL
 
@@ -408,8 +425,7 @@ int mpfi_LegendrePolynomial(
         mpfi_LegendrePolynomial_ComputeDegree0(ref1);
 
         // P_{-1}: undefined
-        mpfr_set_nan(&ref2->left);
-        mpfr_set_nan(&ref2->right);
+        mpfi_LegendrePolynomial_SetNaN(ref2);
 
     }
 
@@ -441,8 +457,7 @@ int mpfi_LegendrePolynomial_Derivative(
     // validation: x
     if ( !mpfi_is_valid_LegendrePolynomial(legendre_polynomial->x, legendre_polynomial->range) ) {
 
-        mpfr_set_nan( &(derivative->left  ) );
-        mpfr_set_nan( &(derivative->right ) );
+        mpfi_LegendrePolynomial_SetNaN(derivative);
 
         return EXIT_FAILURE;
 
